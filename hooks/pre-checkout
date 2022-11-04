@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [ -z "$BUILDKITE_REPO" ] || [ ! -d "$BUILDKITE_BUILD_CHECKOUT_PATH/.git" ]; then
+  exit
+fi
+
+cd "$BUILDKITE_BUILD_CHECKOUT_PATH"
+
+echo "~~~ Verifying existing git checkout"
+echo "$BUILDKITE_BUILD_CHECKOUT_PATH"
+if ! git fsck --no-dangling --connectivity-only; then
+  echo "^^^ +++"
+  echo "git checkout is corrupt!"
+  export BUILDKITE_CLEAN_CHECKOUT=1
+fi

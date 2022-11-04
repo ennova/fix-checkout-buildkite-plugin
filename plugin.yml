@@ -1,0 +1,7 @@
+name: Fix Checkout
+description: Runs git fsck and removes the cached checkout if it's corrupt
+author: https://github.com/ennova
+requirements: []
+configuration:
+  properties: {}
+  additionalProperties: false
